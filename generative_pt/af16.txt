@@ -1,0 +1,25 @@
+Loading prepared vocab from ./data/demo_30000.vocab.pt ...
+Vocabulary size of fields: SRC-30004 TGT-30004 CUE-30004
+Loading prepared data from ./data/demo_30000.data.pt ...
+Number of examples: TRAIN-89901 VALID-9054 TEST-9054
+Saved params to './models/params.json'
+Saved generation results to './models/valid_1.result'
+Saved generation results to './models/valid_2.result'
+Saved generation results to './models/valid_3.result'
+Saved generation results to './models/valid_4.result'
+Saved generation results to './models/valid_5.result'
+Saved generation results to './models/valid_6.result'
+Saved generation results to './models/valid_7.result'
+Saved generation results to './models/valid_8.result'
+Saved generation results to './models/valid_9.result'
+Saved generation results to './models/valid_10.result'
+Saved generation results to './models/valid_11.result'
+Saved generation results to './models/valid_12.result'
+Saved generation results to './models/valid_13.result'
+Saved generation results to './models/valid_14.result'
+Saved generation results to './models/valid_15.result'
+Saved generation results to './models/valid_16.result'
+Saved generation results to './models/valid_17.result'
+Saved generation results to './models/valid_18.result'
+Saved generation results to './models/valid_19.result'
+Saved generation results to './models/valid_20.result'

@@ -26,7 +26,9 @@ class RNNEncoder(nn.Module):
                  embedder=None,
                  num_layers=1,
                  bidirectional=True,
-                 dropout=0.0):
+                 dropout=0.0,
+                 gi=False,
+                 **args):
         super(RNNEncoder, self).__init__()
 
         num_directions = 2 if bidirectional else 1
@@ -40,7 +42,8 @@ class RNNEncoder(nn.Module):
         self.num_layers = num_layers
         self.bidirectional = bidirectional
         self.dropout = dropout
-
+        if gi:
+            self.input_size += self.hidden_size
         self.rnn = nn.GRU(input_size=self.input_size,
                           hidden_size=self.rnn_hidden_size,
                           num_layers=self.num_layers,
@@ -48,7 +51,7 @@ class RNNEncoder(nn.Module):
                           dropout=self.dropout if self.num_layers > 1 else 0,
                           bidirectional=self.bidirectional)
 
-    def forward(self, inputs, hidden=None):
+    def forward(self, inputs, hidden=None, **args):
         """
         forward
         """
@@ -63,6 +66,15 @@ class RNNEncoder(nn.Module):
             rnn_inputs = inputs
 
         batch_size = rnn_inputs.size(0)
+        if "gi" in args:
+            gi = args["gi"]
+            rnn_inputs = torch.cat(
+                [
+                    rnn_inputs,
+                    torch.cat([gi.unsqueeze(1)]*rnn_inputs.size(1), dim=1)
+                ],
+                dim = -1
+            )
 
         if lengths is not None:
             num_valid = lengths.gt(0).int().sum().item()

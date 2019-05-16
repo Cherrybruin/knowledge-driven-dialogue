@@ -1,0 +1,844 @@
+nohup: 忽略输入
+/home/liyunkai/.local/lib/python3.6/site-packages/torch/nn/_reduction.py:49: UserWarning: size_average and reduce args will be deprecated, please use reduction='mean' instead.
+  warnings.warn(warning.format(ret))
+KnowledgeSeq2Seq(
+  (encoder): RNNEncoder(
+    (embedder): Embedder(30004, 300, padding_idx=0)
+    (rnn): GRU(1324, 512, batch_first=True, bidirectional=True)
+  )
+  (bridge): Sequential(
+    (0): Linear(in_features=1024, out_features=1024, bias=True)
+    (1): Tanh()
+  )
+  (knowledge_encoder): RNNEncoder(
+    (embedder): Embedder(30004, 300, padding_idx=0)
+    (rnn): GRU(300, 512, batch_first=True, bidirectional=True)
+  )
+  (prior_attention): Attention(1024, 1024, mode='dot')
+  (posterior_attention): Attention(1024, 1024, mode='dot')
+  (static_interpreter): Linear(in_features=1024, out_features=1, bias=True)
+  (decoder): RNNDecoder(
+    (embedder): Embedder(30004, 300, padding_idx=0)
+    (attention): Attention(1024, 1024, 512, mode='mlp')
+    (rnn): GRU(1324, 1024, batch_first=True)
+    (cue_rnn): GRU(2048, 1024, batch_first=True)
+    (fc1): Linear(in_features=1024, out_features=1024, bias=True)
+    (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+    (fc3): Linear(in_features=2048, out_features=1, bias=True)
+    (tanh): Tanh()
+    (sigmoid): Sigmoid()
+    (output_layer): Sequential(
+      (0): Dropout(p=0.3)
+      (1): Linear(in_features=2048, out_features=1024, bias=True)
+      (2): Linear(in_features=1024, out_features=30004, bias=True)
+      (3): LogSoftmax()
+    )
+  )
+  (log_softmax): LogSoftmax()
+  (softmax): Softmax()
+  (sigmoid): Sigmoid()
+  (softplus): Softplus(beta=1, threshold=20)
+  (nll_loss): NLLLoss()
+  (kl_loss): KLDivLoss()
+)
+Number of parameters: 88866822
+
+Training starts ...
+/home/liyunkai/.local/lib/python3.6/site-packages/torch/nn/functional.py:1906: UserWarning: reduction: 'mean' divides the total loss by both the batch size and the support size.'batchmean' divides only by the batch size, and aligns with the KL div math definition.'mean' will be changed to behave the same as 'batchmean' in the next major release.
+  warnings.warn("reduction: 'mean' divides the total loss by both the batch size and the support size."
+NLL-139.789   NLL_PPL-30922.877   ACC-0.000   KL-0.201   PG_LOSS-82.207   REWARD--108.512   LOSS-222.197
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 1][100/703]   NLL-69.870   ACC-0.214   KL-0.080   PG_LOSS-25.574   REWARD--104.036   LOSS-95.524   TIME-0.70
+[Train][ 1][200/703]   NLL-59.682   ACC-0.286   KL-0.072   PG_LOSS-7.015   REWARD--103.549   LOSS-66.770   TIME-0.75
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 1][200/703]   NLL-58.984   NLL_PPL-78.463   ACC-0.297   KL-0.076   PG_LOSS-6.757   REWARD--103.500   LOSS-65.817
+Saved model state to './models/state_epoch_1.model'
+Saved train state to './models/state_epoch_1.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-65.817
+-------------------------------------------------------------------------------------
+
+[Train][ 1][300/703]   NLL-58.329   ACC-0.327   KL-0.058   PG_LOSS-2.287   REWARD--103.436   LOSS-60.675   TIME-0.76
+[Train][ 1][400/703]   NLL-57.200   ACC-0.346   KL-0.056   PG_LOSS-0.832   REWARD--103.314   LOSS-58.089   TIME-0.76
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 1][400/703]   NLL-52.785   NLL_PPL-49.608   ACC-0.355   KL-0.062   PG_LOSS-0.759   REWARD--103.127   LOSS-53.606
+Saved model state to './models/state_epoch_1.model'
+Saved train state to './models/state_epoch_1.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-53.606
+-------------------------------------------------------------------------------------
+
+[Train][ 1][500/703]   NLL-52.743   ACC-0.364   KL-0.058   PG_LOSS-0.370   REWARD--103.186   LOSS-53.171   TIME-0.80
+[Train][ 1][600/703]   NLL-51.135   ACC-0.367   KL-0.065   PG_LOSS--0.006   REWARD--103.029   LOSS-51.194   TIME-0.96
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 1][600/703]   NLL-49.975   NLL_PPL-40.297   ACC-0.376   KL-0.055   PG_LOSS--0.049   REWARD--102.958   LOSS-49.980
+Saved model state to './models/state_epoch_1.model'
+Saved train state to './models/state_epoch_1.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-49.980
+-------------------------------------------------------------------------------------
+
+[Train][ 1][700/703]   NLL-48.902   ACC-0.389   KL-0.053   PG_LOSS--0.189   REWARD--102.872   LOSS-48.767   TIME-0.75
+Generation starts ...
+Avg_Len-11.303   Bleu-0.4794/0.3668   Inter_Dist-0.0007/0.0019
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_1.model'
+Saved train state to './models/state_epoch_1.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 2][100/703]   NLL-53.841   ACC-0.376   KL-0.054   PG_LOSS--0.136   REWARD--103.009   LOSS-53.759   TIME-0.75
+[Train][ 2][200/703]   NLL-50.622   ACC-0.383   KL-0.055   PG_LOSS--0.154   REWARD--102.999   LOSS-50.524   TIME-0.77
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 2][200/703]   NLL-47.665   NLL_PPL-33.969   ACC-0.399   KL-0.058   PG_LOSS--0.191   REWARD--102.819   LOSS-47.532
+Saved model state to './models/state_epoch_2.model'
+Saved train state to './models/state_epoch_2.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-47.532
+-------------------------------------------------------------------------------------
+
+[Train][ 2][300/703]   NLL-46.820   ACC-0.422   KL-0.045   PG_LOSS--0.254   REWARD--102.771   LOSS-46.611   TIME-0.78
+[Train][ 2][400/703]   NLL-48.067   ACC-0.421   KL-0.047   PG_LOSS--0.223   REWARD--102.733   LOSS-47.891   TIME-0.77
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 2][400/703]   NLL-46.618   NLL_PPL-31.438   ACC-0.408   KL-0.055   PG_LOSS--0.204   REWARD--102.756   LOSS-46.470
+Saved model state to './models/state_epoch_2.model'
+Saved train state to './models/state_epoch_2.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-46.470
+-------------------------------------------------------------------------------------
+
+[Train][ 2][500/703]   NLL-46.455   ACC-0.406   KL-0.054   PG_LOSS--0.176   REWARD--102.730   LOSS-46.333   TIME-0.76
+[Train][ 2][600/703]   NLL-49.751   ACC-0.419   KL-0.048   PG_LOSS--0.135   REWARD--102.829   LOSS-49.664   TIME-0.71
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 2][600/703]   NLL-45.860   NLL_PPL-29.725   ACC-0.415   KL-0.056   PG_LOSS--0.202   REWARD--102.711   LOSS-45.714
+Saved model state to './models/state_epoch_2.model'
+Saved train state to './models/state_epoch_2.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-45.714
+-------------------------------------------------------------------------------------
+
+[Train][ 2][700/703]   NLL-42.526   ACC-0.411   KL-0.047   PG_LOSS--0.286   REWARD--102.675   LOSS-42.287   TIME-0.77
+Generation starts ...
+Avg_Len-10.475   Bleu-0.4725/0.3591   Inter_Dist-0.0011/0.0038
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_2.model'
+Saved train state to './models/state_epoch_2.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 3][100/703]   NLL-43.552   ACC-0.425   KL-0.050   PG_LOSS--0.311   REWARD--102.618   LOSS-43.291   TIME-0.73
+[Train][ 3][200/703]   NLL-45.904   ACC-0.424   KL-0.045   PG_LOSS--0.194   REWARD--102.673   LOSS-45.756   TIME-0.80
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 3][200/703]   NLL-44.961   NLL_PPL-27.812   ACC-0.422   KL-0.054   PG_LOSS--0.191   REWARD--102.657   LOSS-44.824
+Saved model state to './models/state_epoch_3.model'
+Saved train state to './models/state_epoch_3.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-44.824
+-------------------------------------------------------------------------------------
+
+[Train][ 3][300/703]   NLL-45.089   ACC-0.433   KL-0.052   PG_LOSS--0.207   REWARD--102.631   LOSS-44.934   TIME-0.70
+[Train][ 3][400/703]   NLL-43.929   ACC-0.427   KL-0.050   PG_LOSS--0.249   REWARD--102.643   LOSS-43.730   TIME-0.70
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 3][400/703]   NLL-44.466   NLL_PPL-26.811   ACC-0.426   KL-0.055   PG_LOSS--0.206   REWARD--102.628   LOSS-44.315
+Saved model state to './models/state_epoch_3.model'
+Saved train state to './models/state_epoch_3.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-44.315
+-------------------------------------------------------------------------------------
+
+[Train][ 3][500/703]   NLL-43.819   ACC-0.460   KL-0.047   PG_LOSS--0.263   REWARD--102.646   LOSS-43.603   TIME-0.72
+[Train][ 3][600/703]   NLL-41.103   ACC-0.434   KL-0.051   PG_LOSS--0.196   REWARD--102.537   LOSS-40.958   TIME-0.71
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 3][600/703]   NLL-44.019   NLL_PPL-25.941   ACC-0.430   KL-0.053   PG_LOSS--0.205   REWARD--102.601   LOSS-43.868
+Saved model state to './models/state_epoch_3.model'
+Saved train state to './models/state_epoch_3.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-43.868
+-------------------------------------------------------------------------------------
+
+[Train][ 3][700/703]   NLL-44.018   ACC-0.427   KL-0.056   PG_LOSS--0.226   REWARD--102.595   LOSS-43.847   TIME-0.74
+Generation starts ...
+Avg_Len-11.630   Bleu-0.5000/0.3806   Inter_Dist-0.0014/0.0051
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_3.model'
+Saved train state to './models/state_epoch_3.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 4][100/703]   NLL-39.116   ACC-0.458   KL-0.051   PG_LOSS--0.334   REWARD--102.432   LOSS-38.833   TIME-0.69
+[Train][ 4][200/703]   NLL-38.310   ACC-0.451   KL-0.050   PG_LOSS--0.405   REWARD--102.401   LOSS-37.955   TIME-0.76
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 4][200/703]   NLL-43.473   NLL_PPL-24.913   ACC-0.434   KL-0.055   PG_LOSS--0.204   REWARD--102.568   LOSS-43.323
+Saved model state to './models/state_epoch_4.model'
+Saved train state to './models/state_epoch_4.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-43.323
+-------------------------------------------------------------------------------------
+
+[Train][ 4][300/703]   NLL-41.334   ACC-0.415   KL-0.050   PG_LOSS--0.238   REWARD--102.446   LOSS-41.146   TIME-0.65
+[Train][ 4][400/703]   NLL-43.763   ACC-0.432   KL-0.051   PG_LOSS--0.208   REWARD--102.556   LOSS-43.605   TIME-0.71
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 4][400/703]   NLL-43.167   NLL_PPL-24.355   ACC-0.439   KL-0.054   PG_LOSS--0.226   REWARD--102.550   LOSS-42.995
+Saved model state to './models/state_epoch_4.model'
+Saved train state to './models/state_epoch_4.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-42.995
+-------------------------------------------------------------------------------------
+
+[Train][ 4][500/703]   NLL-40.193   ACC-0.441   KL-0.051   PG_LOSS--0.270   REWARD--102.504   LOSS-39.975   TIME-0.71
+[Train][ 4][600/703]   NLL-41.580   ACC-0.475   KL-0.044   PG_LOSS--0.345   REWARD--102.440   LOSS-41.279   TIME-0.73
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 4][600/703]   NLL-42.820   NLL_PPL-23.739   ACC-0.442   KL-0.057   PG_LOSS--0.222   REWARD--102.529   LOSS-42.655
+Saved model state to './models/state_epoch_4.model'
+Saved train state to './models/state_epoch_4.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-42.655
+-------------------------------------------------------------------------------------
+
+[Train][ 4][700/703]   NLL-40.705   ACC-0.453   KL-0.063   PG_LOSS--0.329   REWARD--102.419   LOSS-40.439   TIME-0.83
+Generation starts ...
+Avg_Len-10.580   Bleu-0.4727/0.3592   Inter_Dist-0.0017/0.0071
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_4.model'
+Saved train state to './models/state_epoch_4.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 5][100/703]   NLL-45.403   ACC-0.427   KL-0.049   PG_LOSS--0.260   REWARD--102.493   LOSS-45.192   TIME-0.86
+[Train][ 5][200/703]   NLL-42.340   ACC-0.461   KL-0.057   PG_LOSS--0.373   REWARD--102.459   LOSS-42.025   TIME-0.82
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 5][200/703]   NLL-42.464   NLL_PPL-23.122   ACC-0.446   KL-0.057   PG_LOSS--0.217   REWARD--102.508   LOSS-42.304
+Saved model state to './models/state_epoch_5.model'
+Saved train state to './models/state_epoch_5.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-42.304
+-------------------------------------------------------------------------------------
+
+[Train][ 5][300/703]   NLL-36.879   ACC-0.472   KL-0.049   PG_LOSS--0.320   REWARD--102.390   LOSS-36.608   TIME-0.74
+[Train][ 5][400/703]   NLL-46.610   ACC-0.456   KL-0.059   PG_LOSS--0.262   REWARD--102.532   LOSS-46.407   TIME-0.83
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 5][400/703]   NLL-42.243   NLL_PPL-22.747   ACC-0.449   KL-0.058   PG_LOSS--0.221   REWARD--102.494   LOSS-42.080
+Saved model state to './models/state_epoch_5.model'
+Saved train state to './models/state_epoch_5.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-42.080
+-------------------------------------------------------------------------------------
+
+[Train][ 5][500/703]   NLL-41.876   ACC-0.453   KL-0.049   PG_LOSS--0.162   REWARD--102.551   LOSS-41.762   TIME-0.78
+[Train][ 5][600/703]   NLL-45.596   ACC-0.420   KL-0.057   PG_LOSS--0.190   REWARD--102.537   LOSS-45.462   TIME-0.74
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 5][600/703]   NLL-42.053   NLL_PPL-22.430   ACC-0.448   KL-0.057   PG_LOSS--0.209   REWARD--102.483   LOSS-41.901
+Saved model state to './models/state_epoch_5.model'
+Saved train state to './models/state_epoch_5.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-41.901
+-------------------------------------------------------------------------------------
+
+[Train][ 5][700/703]   NLL-40.592   ACC-0.456   KL-0.059   PG_LOSS--0.345   REWARD--102.359   LOSS-40.306   TIME-0.74
+Generation starts ...
+Avg_Len-10.234   Bleu-0.4602/0.3502   Inter_Dist-0.0021/0.0086
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_5.model'
+Saved train state to './models/state_epoch_5.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 6][100/703]   NLL-41.623   ACC-0.437   KL-0.052   PG_LOSS--0.234   REWARD--102.467   LOSS-41.441   TIME-0.82
+[Train][ 6][200/703]   NLL-35.675   ACC-0.467   KL-0.048   PG_LOSS--0.332   REWARD--102.270   LOSS-35.391   TIME-0.67
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 6][200/703]   NLL-41.798   NLL_PPL-22.011   ACC-0.451   KL-0.056   PG_LOSS--0.205   REWARD--102.468   LOSS-41.649
+Saved model state to './models/state_epoch_6.model'
+Saved train state to './models/state_epoch_6.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-41.649
+-------------------------------------------------------------------------------------
+
+[Train][ 6][300/703]   NLL-40.049   ACC-0.465   KL-0.055   PG_LOSS--0.317   REWARD--102.328   LOSS-39.787   TIME-0.76
+[Train][ 6][400/703]   NLL-41.449   ACC-0.454   KL-0.052   PG_LOSS--0.347   REWARD--102.353   LOSS-41.154   TIME-0.73
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 6][400/703]   NLL-41.615   NLL_PPL-21.714   ACC-0.449   KL-0.061   PG_LOSS--0.214   REWARD--102.457   LOSS-41.462
+Saved model state to './models/state_epoch_6.model'
+Saved train state to './models/state_epoch_6.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-41.462
+-------------------------------------------------------------------------------------
+
+[Train][ 6][500/703]   NLL-42.471   ACC-0.446   KL-0.049   PG_LOSS--0.283   REWARD--102.404   LOSS-42.237   TIME-0.77
+[Train][ 6][600/703]   NLL-36.973   ACC-0.444   KL-0.047   PG_LOSS--0.307   REWARD--102.307   LOSS-36.713   TIME-0.70
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 6][600/703]   NLL-41.413   NLL_PPL-21.393   ACC-0.452   KL-0.060   PG_LOSS--0.226   REWARD--102.445   LOSS-41.248
+Saved model state to './models/state_epoch_6.model'
+Saved train state to './models/state_epoch_6.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-41.248
+-------------------------------------------------------------------------------------
+
+[Train][ 6][700/703]   NLL-38.246   ACC-0.467   KL-0.055   PG_LOSS--0.368   REWARD--102.252   LOSS-37.932   TIME-0.89
+Generation starts ...
+Avg_Len-10.037   Bleu-0.4807/0.3657   Inter_Dist-0.0024/0.0100
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_6.model'
+Saved train state to './models/state_epoch_6.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 7][100/703]   NLL-34.345   ACC-0.490   KL-0.047   PG_LOSS--0.455   REWARD--102.076   LOSS-33.936   TIME-0.73
+[Train][ 7][200/703]   NLL-34.575   ACC-0.494   KL-0.047   PG_LOSS--0.368   REWARD--102.183   LOSS-34.254   TIME-0.72
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 7][200/703]   NLL-41.271   NLL_PPL-21.170   ACC-0.456   KL-0.058   PG_LOSS--0.199   REWARD--102.436   LOSS-41.131
+Saved model state to './models/state_epoch_7.model'
+Saved train state to './models/state_epoch_7.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-41.131
+-------------------------------------------------------------------------------------
+
+[Train][ 7][300/703]   NLL-39.795   ACC-0.462   KL-0.049   PG_LOSS--0.297   REWARD--102.290   LOSS-39.547   TIME-0.78
+[Train][ 7][400/703]   NLL-38.482   ACC-0.468   KL-0.053   PG_LOSS--0.332   REWARD--102.330   LOSS-38.203   TIME-0.75
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 7][400/703]   NLL-41.160   NLL_PPL-20.995   ACC-0.455   KL-0.058   PG_LOSS--0.204   REWARD--102.430   LOSS-41.014
+Saved model state to './models/state_epoch_7.model'
+Saved train state to './models/state_epoch_7.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-41.014
+-------------------------------------------------------------------------------------
+
+[Train][ 7][500/703]   NLL-39.842   ACC-0.445   KL-0.059   PG_LOSS--0.244   REWARD--102.397   LOSS-39.657   TIME-0.73
+[Train][ 7][600/703]   NLL-40.023   ACC-0.450   KL-0.051   PG_LOSS--0.290   REWARD--102.397   LOSS-39.785   TIME-0.69
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 7][600/703]   NLL-40.918   NLL_PPL-20.623   ACC-0.458   KL-0.060   PG_LOSS--0.225   REWARD--102.415   LOSS-40.752
+Saved model state to './models/state_epoch_7.model'
+Saved train state to './models/state_epoch_7.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-40.752
+-------------------------------------------------------------------------------------
+
+[Train][ 7][700/703]   NLL-38.899   ACC-0.464   KL-0.053   PG_LOSS--0.352   REWARD--102.282   LOSS-38.600   TIME-0.73
+Generation starts ...
+Avg_Len-10.611   Bleu-0.4875/0.3714   Inter_Dist-0.0023/0.0108
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_7.model'
+Saved train state to './models/state_epoch_7.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 8][100/703]   NLL-39.087   ACC-0.471   KL-0.054   PG_LOSS--0.356   REWARD--102.227   LOSS-38.785   TIME-0.72
+[Train][ 8][200/703]   NLL-39.184   ACC-0.465   KL-0.052   PG_LOSS--0.240   REWARD--102.249   LOSS-38.996   TIME-0.73
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 8][200/703]   NLL-40.867   NLL_PPL-20.546   ACC-0.461   KL-0.062   PG_LOSS--0.188   REWARD--102.412   LOSS-40.740
+Saved model state to './models/state_epoch_8.model'
+Saved train state to './models/state_epoch_8.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-40.740
+-------------------------------------------------------------------------------------
+
+[Train][ 8][300/703]   NLL-41.167   ACC-0.484   KL-0.049   PG_LOSS--0.311   REWARD--102.266   LOSS-40.905   TIME-0.74
+[Train][ 8][400/703]   NLL-38.090   ACC-0.483   KL-0.061   PG_LOSS--0.397   REWARD--102.178   LOSS-37.754   TIME-0.75
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 8][400/703]   NLL-40.788   NLL_PPL-20.426   ACC-0.458   KL-0.060   PG_LOSS--0.190   REWARD--102.408   LOSS-40.658
+Saved model state to './models/state_epoch_8.model'
+Saved train state to './models/state_epoch_8.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-40.658
+-------------------------------------------------------------------------------------
+
+[Train][ 8][500/703]   NLL-35.339   ACC-0.456   KL-0.044   PG_LOSS--0.285   REWARD--102.243   LOSS-35.098   TIME-0.75
+[Train][ 8][600/703]   NLL-43.883   ACC-0.464   KL-0.054   PG_LOSS--0.310   REWARD--102.304   LOSS-43.628   TIME-0.83
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 8][600/703]   NLL-40.647   NLL_PPL-20.214   ACC-0.460   KL-0.060   PG_LOSS--0.205   REWARD--102.399   LOSS-40.502
+Saved model state to './models/state_epoch_8.model'
+Saved train state to './models/state_epoch_8.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-40.502
+-------------------------------------------------------------------------------------
+
+[Train][ 8][700/703]   NLL-39.285   ACC-0.474   KL-0.056   PG_LOSS--0.263   REWARD--102.260   LOSS-39.078   TIME-0.76
+Generation starts ...
+Avg_Len-10.568   Bleu-0.5003/0.3812   Inter_Dist-0.0029/0.0139
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_8.model'
+Saved train state to './models/state_epoch_8.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][ 9][100/703]   NLL-38.489   ACC-0.456   KL-0.054   PG_LOSS--0.258   REWARD--102.235   LOSS-38.285   TIME-0.74
+[Train][ 9][200/703]   NLL-34.736   ACC-0.488   KL-0.050   PG_LOSS--0.371   REWARD--102.094   LOSS-34.415   TIME-0.81
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 9][200/703]   NLL-40.343   NLL_PPL-19.765   ACC-0.468   KL-0.065   PG_LOSS--0.170   REWARD--102.381   LOSS-40.238
+Saved model state to './models/state_epoch_9.model'
+Saved train state to './models/state_epoch_9.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-40.238
+-------------------------------------------------------------------------------------
+
+[Train][ 9][300/703]   NLL-37.167   ACC-0.489   KL-0.057   PG_LOSS--0.280   REWARD--102.225   LOSS-36.944   TIME-0.69
+[Train][ 9][400/703]   NLL-34.434   ACC-0.501   KL-0.063   PG_LOSS--0.335   REWARD--102.088   LOSS-34.161   TIME-0.67
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 9][400/703]   NLL-40.037   NLL_PPL-19.323   ACC-0.473   KL-0.067   PG_LOSS--0.155   REWARD--102.363   LOSS-39.949
+Saved model state to './models/state_epoch_9.model'
+Saved train state to './models/state_epoch_9.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-39.949
+-------------------------------------------------------------------------------------
+
+[Train][ 9][500/703]   NLL-38.237   ACC-0.491   KL-0.055   PG_LOSS--0.275   REWARD--102.189   LOSS-38.017   TIME-0.77
+[Train][ 9][600/703]   NLL-34.145   ACC-0.487   KL-0.064   PG_LOSS--0.216   REWARD--102.099   LOSS-33.993   TIME-0.73
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][ 9][600/703]   NLL-39.562   NLL_PPL-18.655   ACC-0.480   KL-0.073   PG_LOSS--0.133   REWARD--102.335   LOSS-39.502
+Saved model state to './models/state_epoch_9.model'
+Saved train state to './models/state_epoch_9.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-39.502
+-------------------------------------------------------------------------------------
+
+[Train][ 9][700/703]   NLL-36.595   ACC-0.483   KL-0.076   PG_LOSS--0.135   REWARD--102.200   LOSS-36.536   TIME-0.66
+Generation starts ...
+Avg_Len-10.896   Bleu-0.5175/0.3935   Inter_Dist-0.0035/0.0174
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_9.model'
+Saved train state to './models/state_epoch_9.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][10][100/703]   NLL-33.599   ACC-0.499   KL-0.059   PG_LOSS--0.288   REWARD--102.089   LOSS-33.370   TIME-0.70
+[Train][10][200/703]   NLL-30.921   ACC-0.534   KL-0.064   PG_LOSS--0.323   REWARD--101.933   LOSS-30.662   TIME-0.72
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][10][200/703]   NLL-39.301   NLL_PPL-18.299   ACC-0.485   KL-0.071   PG_LOSS--0.090   REWARD--102.319   LOSS-39.281
+Saved model state to './models/state_epoch_10.model'
+Saved train state to './models/state_epoch_10.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-39.281
+-------------------------------------------------------------------------------------
+
+[Train][10][300/703]   NLL-36.299   ACC-0.513   KL-0.067   PG_LOSS--0.219   REWARD--102.095   LOSS-36.147   TIME-0.75
+[Train][10][400/703]   NLL-34.717   ACC-0.520   KL-0.060   PG_LOSS--0.203   REWARD--102.069   LOSS-34.574   TIME-0.78
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][10][400/703]   NLL-39.042   NLL_PPL-17.952   ACC-0.485   KL-0.068   PG_LOSS--0.096   REWARD--102.304   LOSS-39.014
+Saved model state to './models/state_epoch_10.model'
+Saved train state to './models/state_epoch_10.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-39.014
+-------------------------------------------------------------------------------------
+
+[Train][10][500/703]   NLL-33.746   ACC-0.506   KL-0.061   PG_LOSS--0.216   REWARD--102.028   LOSS-33.592   TIME-0.69
+[Train][10][600/703]   NLL-30.510   ACC-0.516   KL-0.059   PG_LOSS--0.198   REWARD--102.053   LOSS-30.371   TIME-0.66
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][10][600/703]   NLL-38.764   NLL_PPL-17.586   ACC-0.493   KL-0.066   PG_LOSS--0.087   REWARD--102.287   LOSS-38.743
+Saved model state to './models/state_epoch_10.model'
+Saved train state to './models/state_epoch_10.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-38.743
+-------------------------------------------------------------------------------------
+
+[Train][10][700/703]   NLL-35.984   ACC-0.526   KL-0.061   PG_LOSS--0.212   REWARD--102.069   LOSS-35.832   TIME-0.73
+Generation starts ...
+Avg_Len-12.066   Bleu-0.5370/0.4081   Inter_Dist-0.0038/0.0182
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_10.model'
+Saved train state to './models/state_epoch_10.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][11][100/703]   NLL-33.507   ACC-0.532   KL-0.054   PG_LOSS--0.257   REWARD--101.959   LOSS-33.304   TIME-0.73
+[Train][11][200/703]   NLL-32.719   ACC-0.518   KL-0.059   PG_LOSS--0.230   REWARD--101.958   LOSS-32.549   TIME-0.71
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][11][200/703]   NLL-38.625   NLL_PPL-17.406   ACC-0.495   KL-0.064   PG_LOSS--0.055   REWARD--102.279   LOSS-38.634
+Saved model state to './models/state_epoch_11.model'
+Saved train state to './models/state_epoch_11.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-38.634
+-------------------------------------------------------------------------------------
+
+[Train][11][300/703]   NLL-37.534   ACC-0.500   KL-0.054   PG_LOSS--0.204   REWARD--102.146   LOSS-37.384   TIME-0.84
+[Train][11][400/703]   NLL-36.772   ACC-0.509   KL-0.053   PG_LOSS--0.181   REWARD--102.112   LOSS-36.644   TIME-0.80
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][11][400/703]   NLL-38.460   NLL_PPL-17.195   ACC-0.500   KL-0.063   PG_LOSS--0.048   REWARD--102.269   LOSS-38.474
+Saved model state to './models/state_epoch_11.model'
+Saved train state to './models/state_epoch_11.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-38.474
+-------------------------------------------------------------------------------------
+
+[Train][11][500/703]   NLL-31.495   ACC-0.541   KL-0.055   PG_LOSS--0.300   REWARD--101.896   LOSS-31.250   TIME-0.71
+[Train][11][600/703]   NLL-35.087   ACC-0.537   KL-0.058   PG_LOSS--0.227   REWARD--101.989   LOSS-34.918   TIME-0.79
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][11][600/703]   NLL-38.279   NLL_PPL-16.966   ACC-0.503   KL-0.063   PG_LOSS--0.052   REWARD--102.259   LOSS-38.289
+Saved model state to './models/state_epoch_11.model'
+Saved train state to './models/state_epoch_11.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-38.289
+-------------------------------------------------------------------------------------
+
+[Train][11][700/703]   NLL-30.345   ACC-0.537   KL-0.050   PG_LOSS--0.211   REWARD--101.937   LOSS-30.184   TIME-0.72
+Generation starts ...
+Avg_Len-11.664   Bleu-0.5407/0.4118   Inter_Dist-0.0045/0.0224
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_11.model'
+Saved train state to './models/state_epoch_11.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][12][100/703]   NLL-31.148   ACC-0.523   KL-0.055   PG_LOSS--0.230   REWARD--101.888   LOSS-30.972   TIME-0.72
+[Train][12][200/703]   NLL-30.661   ACC-0.539   KL-0.050   PG_LOSS--0.230   REWARD--101.916   LOSS-30.480   TIME-0.67
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][12][200/703]   NLL-38.241   NLL_PPL-16.919   ACC-0.507   KL-0.063   PG_LOSS--0.016   REWARD--102.257   LOSS-38.288
+Saved model state to './models/state_epoch_12.model'
+Saved train state to './models/state_epoch_12.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-38.288
+-------------------------------------------------------------------------------------
+
+[Train][12][300/703]   NLL-33.051   ACC-0.535   KL-0.054   PG_LOSS--0.203   REWARD--101.897   LOSS-32.902   TIME-0.82
+[Train][12][400/703]   NLL-30.434   ACC-0.555   KL-0.048   PG_LOSS--0.271   REWARD--101.868   LOSS-30.210   TIME-0.77
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][12][400/703]   NLL-38.176   NLL_PPL-16.838   ACC-0.508   KL-0.063   PG_LOSS--0.014   REWARD--102.253   LOSS-38.224
+Saved model state to './models/state_epoch_12.model'
+Saved train state to './models/state_epoch_12.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-38.224
+-------------------------------------------------------------------------------------
+
+[Train][12][500/703]   NLL-32.461   ACC-0.521   KL-0.064   PG_LOSS--0.214   REWARD--101.903   LOSS-32.311   TIME-0.73
+[Train][12][600/703]   NLL-35.313   ACC-0.520   KL-0.055   PG_LOSS--0.103   REWARD--102.020   LOSS-35.265   TIME-0.85
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][12][600/703]   NLL-37.967   NLL_PPL-16.580   ACC-0.512   KL-0.063   PG_LOSS--0.020   REWARD--102.240   LOSS-38.010
+Saved model state to './models/state_epoch_12.model'
+Saved train state to './models/state_epoch_12.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-38.010
+-------------------------------------------------------------------------------------
+
+[Train][12][700/703]   NLL-34.776   ACC-0.509   KL-0.052   PG_LOSS--0.128   REWARD--101.997   LOSS-34.700   TIME-0.75
+Generation starts ...
+Avg_Len-11.443   Bleu-0.5455/0.4147   Inter_Dist-0.0050/0.0254
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_12.model'
+Saved train state to './models/state_epoch_12.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][13][100/703]   NLL-31.816   ACC-0.560   KL-0.061   PG_LOSS--0.154   REWARD--101.842   LOSS-31.723   TIME-0.79
+[Train][13][200/703]   NLL-32.965   ACC-0.534   KL-0.057   PG_LOSS--0.103   REWARD--101.931   LOSS-32.919   TIME-0.68
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][13][200/703]   NLL-37.998   NLL_PPL-16.618   ACC-0.513   KL-0.064   PG_LOSS-0.031   REWARD--102.242   LOSS-38.093
+Saved model state to './models/state_epoch_13.model'
+Saved train state to './models/state_epoch_13.train'
+-------------------------------------------------------------------------------------
+
+[Train][13][300/703]   NLL-35.466   ACC-0.532   KL-0.054   PG_LOSS--0.163   REWARD--101.936   LOSS-35.356   TIME-0.72
+[Train][13][400/703]   NLL-33.929   ACC-0.518   KL-0.059   PG_LOSS--0.150   REWARD--101.955   LOSS-33.838   TIME-0.78
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][13][400/703]   NLL-37.875   NLL_PPL-16.467   ACC-0.514   KL-0.063   PG_LOSS-0.022   REWARD--102.235   LOSS-37.960
+Saved model state to './models/state_epoch_13.model'
+Saved train state to './models/state_epoch_13.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-37.960
+-------------------------------------------------------------------------------------
+
+[Train][13][500/703]   NLL-34.619   ACC-0.541   KL-0.053   PG_LOSS--0.128   REWARD--101.967   LOSS-34.544   TIME-0.76
+[Train][13][600/703]   NLL-35.680   ACC-0.536   KL-0.059   PG_LOSS--0.128   REWARD--101.996   LOSS-35.611   TIME-0.82
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][13][600/703]   NLL-37.781   NLL_PPL-16.353   ACC-0.514   KL-0.064   PG_LOSS-0.015   REWARD--102.229   LOSS-37.860
+Saved model state to './models/state_epoch_13.model'
+Saved train state to './models/state_epoch_13.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-37.860
+-------------------------------------------------------------------------------------
+
+[Train][13][700/703]   NLL-27.823   ACC-0.554   KL-0.056   PG_LOSS--0.297   REWARD--101.732   LOSS-27.581   TIME-0.69
+Generation starts ...
+Avg_Len-11.128   Bleu-0.5487/0.4167   Inter_Dist-0.0058/0.0299
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_13.model'
+Saved train state to './models/state_epoch_13.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][14][100/703]   NLL-29.219   ACC-0.584   KL-0.058   PG_LOSS--0.242   REWARD--101.693   LOSS-29.034   TIME-0.71
+[Train][14][200/703]   NLL-31.393   ACC-0.533   KL-0.056   PG_LOSS--0.119   REWARD--101.905   LOSS-31.330   TIME-0.82
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][14][200/703]   NLL-37.737   NLL_PPL-16.300   ACC-0.519   KL-0.063   PG_LOSS-0.040   REWARD--102.227   LOSS-37.841
+Saved model state to './models/state_epoch_14.model'
+Saved train state to './models/state_epoch_14.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-37.841
+-------------------------------------------------------------------------------------
+
+[Train][14][300/703]   NLL-34.495   ACC-0.525   KL-0.054   PG_LOSS--0.111   REWARD--102.000   LOSS-34.438   TIME-0.78
+[Train][14][400/703]   NLL-28.931   ACC-0.557   KL-0.051   PG_LOSS--0.218   REWARD--101.724   LOSS-28.764   TIME-0.68
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][14][400/703]   NLL-37.824   NLL_PPL-16.405   ACC-0.517   KL-0.063   PG_LOSS-0.052   REWARD--102.232   LOSS-37.939
+Saved model state to './models/state_epoch_14.model'
+Saved train state to './models/state_epoch_14.train'
+-------------------------------------------------------------------------------------
+
+[Train][14][500/703]   NLL-31.081   ACC-0.553   KL-0.060   PG_LOSS--0.190   REWARD--101.836   LOSS-30.950   TIME-0.75
+[Train][14][600/703]   NLL-28.906   ACC-0.553   KL-0.056   PG_LOSS--0.177   REWARD--101.811   LOSS-28.786   TIME-0.74
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][14][600/703]   NLL-37.548   NLL_PPL-16.074   ACC-0.522   KL-0.065   PG_LOSS-0.048   REWARD--102.216   LOSS-37.661
+Saved model state to './models/state_epoch_14.model'
+Saved train state to './models/state_epoch_14.train'
+Saved best model state to './models/best.model' with new best valid metric LOSS-37.661
+-------------------------------------------------------------------------------------
+
+[Train][14][700/703]   NLL-35.416   ACC-0.520   KL-0.054   PG_LOSS--0.096   REWARD--102.073   LOSS-35.375   TIME-0.80
+Generation starts ...
+Avg_Len-12.317   Bleu-0.5650/0.4294   Inter_Dist-0.0062/0.0311
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_14.model'
+Saved train state to './models/state_epoch_14.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][15][100/703]   NLL-32.180   ACC-0.539   KL-0.059   PG_LOSS--0.145   REWARD--101.863   LOSS-32.094   TIME-0.82
+[Train][15][200/703]   NLL-28.839   ACC-0.563   KL-0.061   PG_LOSS--0.216   REWARD--101.705   LOSS-28.684   TIME-0.83
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][15][200/703]   NLL-37.676   NLL_PPL-16.227   ACC-0.521   KL-0.063   PG_LOSS-0.084   REWARD--102.223   LOSS-37.823
+Saved model state to './models/state_epoch_15.model'
+Saved train state to './models/state_epoch_15.train'
+-------------------------------------------------------------------------------------
+
+[Train][15][300/703]   NLL-32.650   ACC-0.558   KL-0.053   PG_LOSS--0.102   REWARD--101.819   LOSS-32.601   TIME-0.81
+[Train][15][400/703]   NLL-33.060   ACC-0.524   KL-0.053   PG_LOSS--0.003   REWARD--101.925   LOSS-33.109   TIME-0.76
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][15][400/703]   NLL-37.652   NLL_PPL-16.198   ACC-0.523   KL-0.063   PG_LOSS-0.084   REWARD--102.222   LOSS-37.799
+Saved model state to './models/state_epoch_15.model'
+Saved train state to './models/state_epoch_15.train'
+-------------------------------------------------------------------------------------
+
+[Train][15][500/703]   NLL-30.461   ACC-0.567   KL-0.059   PG_LOSS--0.144   REWARD--101.779   LOSS-30.376   TIME-0.73
+[Train][15][600/703]   NLL-31.441   ACC-0.560   KL-0.062   PG_LOSS--0.149   REWARD--101.816   LOSS-31.353   TIME-0.71
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][15][600/703]   NLL-37.611   NLL_PPL-16.149   ACC-0.523   KL-0.063   PG_LOSS-0.093   REWARD--102.220   LOSS-37.768
+Saved model state to './models/state_epoch_15.model'
+Saved train state to './models/state_epoch_15.train'
+-------------------------------------------------------------------------------------
+
+[Train][15][700/703]   NLL-31.009   ACC-0.558   KL-0.057   PG_LOSS--0.157   REWARD--101.842   LOSS-30.909   TIME-0.66
+Generation starts ...
+Avg_Len-11.660   Bleu-0.5538/0.4208   Inter_Dist-0.0074/0.0353
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_15.model'
+Saved train state to './models/state_epoch_15.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][16][100/703]   NLL-29.164   ACC-0.560   KL-0.046   PG_LOSS--0.114   REWARD--101.823   LOSS-29.095   TIME-0.71
+[Train][16][200/703]   NLL-31.400   ACC-0.560   KL-0.053   PG_LOSS--0.163   REWARD--101.757   LOSS-31.289   TIME-0.78
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][16][200/703]   NLL-37.670   NLL_PPL-16.219   ACC-0.525   KL-0.064   PG_LOSS-0.118   REWARD--102.224   LOSS-37.853
+Saved model state to './models/state_epoch_16.model'
+Saved train state to './models/state_epoch_16.train'
+-------------------------------------------------------------------------------------
+
+[Train][16][300/703]   NLL-28.756   ACC-0.578   KL-0.053   PG_LOSS--0.197   REWARD--101.643   LOSS-28.613   TIME-0.75
+[Train][16][400/703]   NLL-31.285   ACC-0.574   KL-0.059   PG_LOSS--0.120   REWARD--101.754   LOSS-31.224   TIME-0.72
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][16][400/703]   NLL-37.672   NLL_PPL-16.221   ACC-0.524   KL-0.065   PG_LOSS-0.123   REWARD--102.224   LOSS-37.860
+Saved model state to './models/state_epoch_16.model'
+Saved train state to './models/state_epoch_16.train'
+-------------------------------------------------------------------------------------
+
+[Train][16][500/703]   NLL-30.783   ACC-0.561   KL-0.045   PG_LOSS--0.149   REWARD--101.755   LOSS-30.679   TIME-0.77
+[Train][16][600/703]   NLL-27.249   ACC-0.568   KL-0.050   PG_LOSS--0.152   REWARD--101.703   LOSS-27.148   TIME-0.64
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][16][600/703]   NLL-37.539   NLL_PPL-16.063   ACC-0.526   KL-0.064   PG_LOSS-0.112   REWARD--102.216   LOSS-37.715
+Saved model state to './models/state_epoch_16.model'
+Saved train state to './models/state_epoch_16.train'
+-------------------------------------------------------------------------------------
+
+[Train][16][700/703]   NLL-22.830   ACC-0.624   KL-0.046   PG_LOSS--0.299   REWARD--101.489   LOSS-22.576   TIME-0.66
+Generation starts ...
+Avg_Len-11.841   Bleu-0.5680/0.4321   Inter_Dist-0.0075/0.0382
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_16.model'
+Saved train state to './models/state_epoch_16.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][17][100/703]   NLL-28.665   ACC-0.598   KL-0.048   PG_LOSS--0.184   REWARD--101.613   LOSS-28.529   TIME-0.77
+[Train][17][200/703]   NLL-27.074   ACC-0.581   KL-0.056   PG_LOSS--0.183   REWARD--101.611   LOSS-26.947   TIME-0.76
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][17][200/703]   NLL-37.711   NLL_PPL-16.269   ACC-0.526   KL-0.065   PG_LOSS-0.157   REWARD--102.226   LOSS-37.933
+Saved model state to './models/state_epoch_17.model'
+Saved train state to './models/state_epoch_17.train'
+-------------------------------------------------------------------------------------
+
+[Train][17][300/703]   NLL-27.822   ACC-0.610   KL-0.053   PG_LOSS--0.164   REWARD--101.540   LOSS-27.711   TIME-0.80
+[Train][17][400/703]   NLL-26.356   ACC-0.603   KL-0.055   PG_LOSS--0.179   REWARD--101.612   LOSS-26.232   TIME-0.61
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][17][400/703]   NLL-37.715   NLL_PPL-16.273   ACC-0.526   KL-0.066   PG_LOSS-0.167   REWARD--102.226   LOSS-37.948
+Saved model state to './models/state_epoch_17.model'
+Saved train state to './models/state_epoch_17.train'
+-------------------------------------------------------------------------------------
+
+[Train][17][500/703]   NLL-25.949   ACC-0.586   KL-0.060   PG_LOSS--0.194   REWARD--101.605   LOSS-25.815   TIME-0.70
+[Train][17][600/703]   NLL-27.998   ACC-0.572   KL-0.056   PG_LOSS--0.201   REWARD--101.624   LOSS-27.853   TIME-0.74
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][17][600/703]   NLL-37.665   NLL_PPL-16.213   ACC-0.528   KL-0.064   PG_LOSS-0.146   REWARD--102.223   LOSS-37.876
+Saved model state to './models/state_epoch_17.model'
+Saved train state to './models/state_epoch_17.train'
+-------------------------------------------------------------------------------------
+
+[Train][17][700/703]   NLL-26.762   ACC-0.608   KL-0.060   PG_LOSS--0.180   REWARD--101.596   LOSS-26.642   TIME-0.68
+Generation starts ...
+Avg_Len-11.800   Bleu-0.5709/0.4347   Inter_Dist-0.0088/0.0424
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_17.model'
+Saved train state to './models/state_epoch_17.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][18][100/703]   NLL-27.851   ACC-0.587   KL-0.056   PG_LOSS--0.129   REWARD--101.657   LOSS-27.778   TIME-0.67
+[Train][18][200/703]   NLL-29.622   ACC-0.582   KL-0.059   PG_LOSS--0.076   REWARD--101.704   LOSS-29.605   TIME-0.79
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][18][200/703]   NLL-37.917   NLL_PPL-16.519   ACC-0.527   KL-0.064   PG_LOSS-0.195   REWARD--102.239   LOSS-38.176
+Saved model state to './models/state_epoch_18.model'
+Saved train state to './models/state_epoch_18.train'
+-------------------------------------------------------------------------------------
+
+[Train][18][300/703]   NLL-28.949   ACC-0.589   KL-0.048   PG_LOSS--0.131   REWARD--101.642   LOSS-28.866   TIME-0.78
+[Train][18][400/703]   NLL-28.055   ACC-0.594   KL-0.059   PG_LOSS--0.104   REWARD--101.611   LOSS-28.010   TIME-0.72
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][18][400/703]   NLL-37.876   NLL_PPL-16.468   ACC-0.527   KL-0.067   PG_LOSS-0.189   REWARD--102.236   LOSS-38.131
+Saved model state to './models/state_epoch_18.model'
+Saved train state to './models/state_epoch_18.train'
+-------------------------------------------------------------------------------------
+
+[Train][18][500/703]   NLL-27.843   ACC-0.586   KL-0.052   PG_LOSS--0.148   REWARD--101.620   LOSS-27.748   TIME-0.68
+[Train][18][600/703]   NLL-28.144   ACC-0.588   KL-0.059   PG_LOSS--0.120   REWARD--101.694   LOSS-28.084   TIME-0.75
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][18][600/703]   NLL-37.873   NLL_PPL-16.464   ACC-0.530   KL-0.064   PG_LOSS-0.184   REWARD--102.236   LOSS-38.121
+Saved model state to './models/state_epoch_18.model'
+Saved train state to './models/state_epoch_18.train'
+-------------------------------------------------------------------------------------
+
+[Train][18][700/703]   NLL-29.320   ACC-0.598   KL-0.060   PG_LOSS--0.044   REWARD--101.754   LOSS-29.336   TIME-0.85
+Generation starts ...
+Avg_Len-11.974   Bleu-0.5762/0.4387   Inter_Dist-0.0094/0.0448
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_18.model'
+Saved train state to './models/state_epoch_18.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][19][100/703]   NLL-26.401   ACC-0.623   KL-0.059   PG_LOSS--0.208   REWARD--101.581   LOSS-26.253   TIME-0.74
+[Train][19][200/703]   NLL-28.049   ACC-0.581   KL-0.051   PG_LOSS--0.129   REWARD--101.616   LOSS-27.971   TIME-0.77
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][19][200/703]   NLL-38.038   NLL_PPL-16.667   ACC-0.529   KL-0.064   PG_LOSS-0.224   REWARD--102.246   LOSS-38.327
+Saved model state to './models/state_epoch_19.model'
+Saved train state to './models/state_epoch_19.train'
+-------------------------------------------------------------------------------------
+
+[Train][19][300/703]   NLL-28.813   ACC-0.592   KL-0.050   PG_LOSS--0.119   REWARD--101.654   LOSS-28.744   TIME-0.83
+[Train][19][400/703]   NLL-24.885   ACC-0.607   KL-0.049   PG_LOSS--0.150   REWARD--101.580   LOSS-24.783   TIME-0.75
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][19][400/703]   NLL-38.031   NLL_PPL-16.658   ACC-0.530   KL-0.064   PG_LOSS-0.218   REWARD--102.246   LOSS-38.313
+Saved model state to './models/state_epoch_19.model'
+Saved train state to './models/state_epoch_19.train'
+-------------------------------------------------------------------------------------
+
+[Train][19][500/703]   NLL-29.269   ACC-0.579   KL-0.061   PG_LOSS--0.086   REWARD--101.711   LOSS-29.244   TIME-0.74
+[Train][19][600/703]   NLL-29.085   ACC-0.595   KL-0.057   PG_LOSS--0.083   REWARD--101.678   LOSS-29.059   TIME-0.84
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][19][600/703]   NLL-37.968   NLL_PPL-16.581   ACC-0.530   KL-0.064   PG_LOSS-0.214   REWARD--102.242   LOSS-38.246
+Saved model state to './models/state_epoch_19.model'
+Saved train state to './models/state_epoch_19.train'
+-------------------------------------------------------------------------------------
+
+[Train][19][700/703]   NLL-24.875   ACC-0.620   KL-0.054   PG_LOSS--0.214   REWARD--101.474   LOSS-24.715   TIME-0.75
+Generation starts ...
+Avg_Len-11.730   Bleu-0.5702/0.4342   Inter_Dist-0.0113/0.0527
+Target:   AVG_LEN-12.520   Inter_Dist-0.0517/0.2706
+Saved model state to './models/state_epoch_19.model'
+Saved train state to './models/state_epoch_19.train'
+
+
+=====================================================================================
+================================== Model Training ===================================
+=====================================================================================
+
+[Train][20][100/703]   NLL-26.572   ACC-0.592   KL-0.056   PG_LOSS--0.066   REWARD--101.613   LOSS-26.562   TIME-0.68
+[Train][20][200/703]   NLL-25.551   ACC-0.598   KL-0.053   PG_LOSS--0.079   REWARD--101.547   LOSS-25.525   TIME-0.78
+
+--------------------------------- Model Evaulation ---------------------------------
+[Valid][20][200/703]   NLL-38.291   NLL_PPL-16.982   ACC-0.529   KL-0.065   PG_LOSS-0.256   REWARD--102.262   LOSS-38.612
+Saved model state to './models/state_epoch_20.model'
+Saved train state to './models/state_epoch_20.train'
+-------------------------------------------------------------------------------------
+

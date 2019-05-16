@@ -44,17 +44,17 @@ def model_config():
     # Network
     net_arg = parser.add_argument_group("Network")
     net_arg.add_argument("--embed_size", type=int, default=300)
-    net_arg.add_argument("--hidden_size", type=int, default=800)
+    net_arg.add_argument("--hidden_size", type=int, default=1024)
     net_arg.add_argument("--bidirectional", type=str2bool, default=True)
     net_arg.add_argument("--max_vocab_size", type=int, default=30000)
     net_arg.add_argument("--min_len", type=int, default=1)
     net_arg.add_argument("--max_len", type=int, default=500)
     net_arg.add_argument("--num_layers", type=int, default=1)
-    net_arg.add_argument("--attn", type=str, default='dot',
+    net_arg.add_argument("--attn", type=str, default='mlp',
                          choices=['none', 'mlp', 'dot', 'general'])
     net_arg.add_argument("--share_vocab", type=str2bool, default=True)
     net_arg.add_argument("--with_bridge", type=str2bool, default=True)
-    net_arg.add_argument("--tie_embedding", type=str2bool, default=True)
+    net_arg.add_argument("--tie_embedding", type=str2bool, default=False)
 
     # Training / Testing
     train_arg = parser.add_argument_group("Training")

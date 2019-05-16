@@ -136,6 +136,7 @@ class RNNDecoder(nn.Module):
         """
         decode
         """
+        # print(state)
         hidden = state.hidden
         rnn_input_list = []
         cue_input_list = []
@@ -154,11 +155,12 @@ class RNNDecoder(nn.Module):
             feature = state.feature.unsqueeze(1)
             rnn_input_list.append(feature)
             cue_input_list.append(feature)
-
+        
         if self.attn_mode is not None:
             attn_memory = state.attn_memory
             attn_mask = state.attn_mask
             query = hidden[-1].unsqueeze(1)
+            # print("query", query.size(),"atten,", attn_memory.size())
             weighted_context, attn = self.attention(query=query,
                                                     memory=attn_memory,
                                                     mask=attn_mask)

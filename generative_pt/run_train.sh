@@ -6,21 +6,21 @@
 ################################################################################
 
 # set gpu id to use
-export CUDA_VISIBLE_DEVICES=0
+# export CUDA_VISIBLE_DEVICES=0
 
 # generalizes target_a/target_b of goal for all outputs, replaces them with slot mark
 TOPIC_GENERALIZATION=1
 
 # set python path according to your actual environment
-pythonpath='python'
+pythonpath='python3.6'
 
 # the prefix of the file name used by the model, must be consistent with the configuration in network.py
-prefix=demo
+prefix=night17
 
 # put all data set that used and generated for training under this folder: datapath
 # for more details, please refer to the following data processing instructions
 datapath=./data
-
+modelpath=/home/share/liyunkai/nlp/night17
 # in train stage, use "train.txt" to train model, and use "dev.txt" to eval model
 # the "train.txt" and "dev.txt" are the original data provided by the organizer and
 # need to be placed in this folder: datapath/resource/
@@ -55,4 +55,4 @@ done
 cp ${datapath}/${prefix}.dev ${datapath}/${prefix}.test
 
 # step 4: train model, you can find the model file in ./models/ after training
-${pythonpath} ./network.py --gpu 0 > log.txt
+${pythonpath} ./network.py --gpu 0 --data_prefix ${prefix} --save_dir ${modelpath} --embed_file ./data/resource/vectors1.txt --use_bow True --batch_size 80 

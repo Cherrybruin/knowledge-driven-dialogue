@@ -26,9 +26,9 @@ def tokenize(s):
     """
     tokenize
     """
-    s = re.sub('\d+', NUM, s).lower()
-    # tokens = nltk.RegexpTokenizer(r'\w+|<sil>|[^\w\s]+').tokenize(s)
-    tokens = s.split(' ')
+    # s = re.sub('\d+', NUM, s).lower()
+    tokens = nltk.RegexpTokenizer(r'\w+|<sil>|[^\w\s]+').tokenize(s)
+    # tokens = s.split(' ')
     return tokens
 
 

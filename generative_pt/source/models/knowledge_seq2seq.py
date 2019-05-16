@@ -64,7 +64,7 @@ class KnowledgeSeq2Seq(BaseModel):
 
         self.encoder = RNNEncoder(input_size=self.embed_size, hidden_size=self.hidden_size,
                                   embedder=enc_embedder, num_layers=self.num_layers,
-                                  bidirectional=self.bidirectional, dropout=self.dropout)
+                                  bidirectional=self.bidirectional, dropout=self.dropout, gi = True)
 
         if self.with_bridge:
             self.bridge = nn.Sequential(nn.Linear(self.hidden_size, self.hidden_size), nn.Tanh())
@@ -96,6 +96,7 @@ class KnowledgeSeq2Seq(BaseModel):
                                              memory_size=self.hidden_size,
                                              hidden_size=self.hidden_size,
                                              mode="dot")
+        self.static_interpreter = nn.Linear(self.hidden_size, 1)
 
         self.decoder = RNNDecoder(input_size=self.embed_size, hidden_size=self.hidden_size,
                                   output_size=self.tgt_vocab_size, embedder=dec_embedder,
@@ -140,11 +141,6 @@ class KnowledgeSeq2Seq(BaseModel):
         encode
         """
         outputs = Pack()
-        enc_inputs = _, lengths = inputs.src[0][:, 1:-1], inputs.src[1]-2
-        enc_outputs, enc_hidden = self.encoder(enc_inputs, hidden)
-
-        if self.with_bridge:
-            enc_hidden = self.bridge(enc_hidden)
 
         # knowledge
         batch_size, sent_num, sent  = inputs.cue[0].size()
@@ -153,6 +149,17 @@ class KnowledgeSeq2Seq(BaseModel):
         cue_inputs = inputs.cue[0].view(-1, sent)[:, 1:-1], tmp_len.view(-1)
         cue_enc_outputs, cue_enc_hidden = self.knowledge_encoder(cue_inputs, hidden)
         cue_outputs = cue_enc_hidden[-1].view(batch_size, sent_num, -1)
+        
+        # static interpreter
+        gi = torch.softmax(self.static_interpreter(cue_outputs), dim=-1)
+        gi = torch.sum(gi*cue_outputs, dim=1)
+
+        enc_inputs = _, lengths = inputs.src[0][:, 1:-1], inputs.src[1]-2
+        enc_outputs, enc_hidden = self.encoder(enc_inputs, hidden, gi=gi)
+
+        if self.with_bridge:
+            enc_hidden = self.bridge(enc_hidden)
+
         # Attention
         weighted_cue, cue_attn = self.prior_attention(query=enc_hidden[-1].unsqueeze(1),
                                                       memory=cue_outputs,
@@ -248,6 +255,7 @@ class KnowledgeSeq2Seq(BaseModel):
         """
         outputs, dec_init_state = self.encode(
                 enc_inputs, hidden, is_training=is_training)
+        # print(dec_init_state)
         log_probs, _ = self.decoder(dec_inputs, dec_init_state)
         outputs.add(logits=log_probs)
         return outputs

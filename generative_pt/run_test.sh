@@ -6,16 +6,16 @@
 ################################################################################
 
 # set gpu id to use
-export CUDA_VISIBLE_DEVICES=0
+# export CUDA_VISIBLE_DEVICES=0
 
 # generalizes target_a/target_b of goal for all outputs, replaces them with slot mark
 TOPIC_GENERALIZATION=1
 
 # set python path according to your actual environment
-pythonpath='python'
+pythonpath='python3.6'
 
 # the prefix of the file name used by the model, must be consistent with the configuration in network.py
-prefix=demo
+prefix=night17
 
 # put all data set that used and generated for testing under this folder: datapath
 # for more details, please refer to the following data processing instructions
@@ -29,7 +29,8 @@ datapath=./data
 # because dev.txt is session data, you have all the utterances both of bot and user
 # after testing test.txt, you can upload the predict to the competition website to get result
 # DATA_TYPE = "dev" or "test"
-datapart=dev
+datapart=test
+modelpath=/home/share/liyunkai/nlp/night17
 
 # ensure that each file is in the correct path
 #     1. put the data provided by the organizers under this folder: datapath/resource/
@@ -56,7 +57,7 @@ fi
 ${pythonpath} ./tools/convert_conversation_corpus_to_model_text.py ${sample_file} ${text_file} ${topic_file} ${TOPIC_GENERALIZATION}
 
 # step 3: predict by model
-${pythonpath} ./network.py --test --ckpt models/best.model --gen_file ./output/test.result --use_posterior False --gpu 0 > log.txt 2>&1
+${pythonpath} ./network.py --test --gpu 1 --data_prefix ${prefix} --save_dir ${modelpath} --embed_file ./data/resource/vectors1.txt --use_bow True --batch_size 80 --ckpt ${modelpath}/best.model --gen_file ./output/test.result --use_posterior False
 
 # step 4: replace slot mark generated during topic generalization with real text
 ${pythonpath} ./tools/topic_materialization.py ./output/test.result ./output/test.result.final ${topic_file}
