@@ -1,6 +1,18 @@
-knowledge-driven-dialogue
+# knowledge-driven-dialogue 
+#### forked by Liyunkai
 =============================
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## first
+clone the repository
+
+**add vectors.txt from beishicheng to ./data/resources/**
+
+edit some hyper-parameters and run ./run_train.sh
+
+careful for you GPU-device
+
+you are supposed to save different models in different dir
 
 # about the competition
 Human-machine conversation is one of the most important topics in artificial intelligence (AI) and has received much attention across academia and industry in recent years. Currently dialogue system is still in its infancy, which usually converses passively and utters their words more as a matter of response rather than on their own initiatives, which is different from human-human conversation. Therefore, we set up this competition on a new conversation task, named knowledge driven dialogue, where machines converse with humans based on a built knowledge graph. It aims at testing machines’ ability to conduct human-like conversations.<br>
@@ -15,3 +27,6 @@ We provide retrieval-based and generation-based baseline systems. Both systems w
 | ------------- | ------------ | ------------ |
 | retrieval-based | 31.72/0.291/0.156 | 0.118/0.373 |
 | generation-based | 32.65/0.300/0.168 | 0.062/0.128 |
+
+
+
